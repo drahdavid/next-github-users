@@ -4,6 +4,7 @@ import { UserI } from "@/globals/interfaces";
 import { UserDetail } from "@/components/UserDetail";
 import { Layout } from "@/components/Layout";
 import { NotFound } from "@/components/NotFound";
+import { user } from "@/mocks";
 
 export default function User({ user }: { user: UserI }) {
   return (
@@ -20,10 +21,10 @@ export default function User({ user }: { user: UserI }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const userName = context.params?.name;
 
-  const user = await axios
-    .get(`https://api.github.com/users/${userName}`)
-    .then((response) => response.data)
-    .catch((error) => console.log(error));
+  // const user = await axios
+  //   .get(`${process.env.GITHUB_API}/users/${userName}`)
+  //   .then((response) => response.data)
+  //   .catch((error) => console.log(error));
 
   if (!user) {
     return {
