@@ -1,9 +1,9 @@
 import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
 import { Layout } from "@/components/Layout";
 import axios from "axios";
 import { UsersI } from "@/globals/interfaces";
 import { users } from "@/mocks";
+import { UserCard } from "@/components/UserCard";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,7 +22,7 @@ export default function Home({ users }: UsersI) {
       <Layout title="Home">
         {users.map((user) => (
           <div key={user.id}>
-            <p>{user.login}</p>
+            <UserCard loginName={user.login} avatar_url={user.avatar_url} />
           </div>
         ))}
       </Layout>
@@ -31,10 +31,10 @@ export default function Home({ users }: UsersI) {
 }
 
 export async function getServerSideProps() {
-  const users = await axios
-    .get(`${process.env.GITHUB_API}/users`)
-    .then((reponse) => reponse.data)
-    .catch((error) => console.log(error));
+  // const users = await axios
+  //   .get(`${process.env.GITHUB_API}/users`)
+  //   .then((reponse) => reponse.data)
+  //   .catch((error) => console.log(error));
 
   if (!users) {
     return {
