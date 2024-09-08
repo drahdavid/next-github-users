@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { HomeContainer, Loader } from "./styles";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { UsersI } from "@/globals/interfaces";
+import { HomeContainer, Loader } from "./styles";
+import { Typography } from "@mui/material";
 import { UserCard } from "@/components/UserCard";
 import { SearchBar } from "@/components/SearchBar";
-import axios from "axios";
 import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
-import { Typography } from "@mui/material";
 
 export const Home = ({ users }: UsersI) => {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [usersClient, setUsersClient] = useState(users);
   const [isLoadingQuery, setIsLoadingQuery] = useState(false);
@@ -18,6 +20,13 @@ export const Home = ({ users }: UsersI) => {
   };
 
   const handleQuerySearch = async () => {
+    if (!searchQuery) return;
+
+    router.push({
+      query: {
+        users: searchQuery,
+      },
+    });
     setIsLoadingQuery(true);
     setQueryError(false);
 
