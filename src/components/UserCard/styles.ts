@@ -1,18 +1,31 @@
-import { Avatar, Box, styled } from "@mui/material";
+import { Avatar, IconButton, Paper, styled } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-export const UserCardContainer = styled(Box)(() => ({
+export const PaperStyled = styled(Paper)(() => ({
+  width: "300px",
+  height: "90px",
+  padding: "20px",
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-start",
-  border: `1px solid white`,
-  borderRadius: 1,
-  boxShadow: "1",
-  padding: 20,
   textTransform: "capitalize",
+  gap: 2,
 }));
 
 export const AvatarStyled = styled(Avatar)(() => ({
-  width: "56px",
-  height: "56px",
-  marginRight: "10px",
+  width: "70px",
+  height: "70px",
+}));
+
+export const IconButtonStyled = styled(IconButton)(() => ({
+  marginLeft: "auto",
+}));
+
+export const StarIconStyled = styled(StarIcon)(() => ({
+  cursor: "pointer",
+  color: "black",
+}));
+
+export const StarBorderIconStyled = styled(StarBorderIcon)(() => ({
+  cursor: "pointer",
 }));

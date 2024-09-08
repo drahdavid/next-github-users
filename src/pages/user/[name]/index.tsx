@@ -1,16 +1,16 @@
 import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { UserI } from "@/globals/interfaces";
-import { UserDetail } from "@/components/UserDetail";
 import { Layout } from "@/components/Layout";
 import { NotFound } from "@/components/NotFound";
 import { user } from "@/mocks";
+import { User as UserModule } from "@/modules/User";
 
 export default function User({ user }: { user: UserI }) {
   return (
     <Layout title="User">
       {user ? (
-        <UserDetail avatarUrl={user.avatar_url} name={user.name} user={user} />
+        <UserModule avatarUrl={user.avatar_url} name={user.name} user={user} />
       ) : (
         <NotFound searchTerm="user" />
       )}
