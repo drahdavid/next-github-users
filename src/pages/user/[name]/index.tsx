@@ -9,11 +9,7 @@ import { User as UserModule } from "@/modules/User";
 export default function User({ user }: { user: UserI }) {
   return (
     <Layout title="User">
-      {user ? (
-        <UserModule avatarUrl={user.avatar_url} name={user.name} user={user} />
-      ) : (
-        <NotFound searchTerm="user" />
-      )}
+      {user ? <UserModule user={user} /> : <NotFound searchTerm="user" />}
     </Layout>
   );
 }
