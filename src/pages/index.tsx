@@ -3,6 +3,7 @@ import axios from "axios";
 import { UsersI } from "@/globals/interfaces";
 import { users } from "@/mocks";
 import { Home as HomeModule } from "@/modules/Home";
+import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
 
 export default function Home({ users }: UsersI) {
   return (
@@ -16,7 +17,7 @@ export default function Home({ users }: UsersI) {
 
 export async function getServerSideProps() {
   // const users = await axios
-  //   .get(`${process.env.GITHUB_API}/users`)
+  //   .get(`${NEXT_PUBLIC_GITHUB_API}/users`)
   //   .then((reponse) => reponse.data)
   //   .catch((error) => console.log(error));
 

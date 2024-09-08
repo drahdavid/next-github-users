@@ -3,13 +3,13 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 export const PaperStyled = styled(Paper)(() => ({
-  width: "300px",
+  width: "550px",
   height: "90px",
   padding: "20px",
   display: "flex",
   alignItems: "center",
   textTransform: "capitalize",
-  gap: 2,
+  gap: 20,
 }));
 
 export const AvatarStyled = styled(Avatar)(() => ({

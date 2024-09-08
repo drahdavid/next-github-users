@@ -1,5 +1,5 @@
 declare namespace NodeJS {
   export interface ProcessEnv {
-    readonly GITHUB_API: string;
+    readonly NEXT_PUBLIC_GITHUB_API: string;
   }
 }
