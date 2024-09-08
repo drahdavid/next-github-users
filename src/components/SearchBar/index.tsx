@@ -22,7 +22,10 @@ export const SearchBar = ({
         input: {
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={() => alert("search")} aria-label="search">
+              <IconButton
+                onClick={() => handleQuerySearch()}
+                aria-label="search"
+              >
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
