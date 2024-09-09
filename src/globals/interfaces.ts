@@ -52,6 +52,7 @@ export interface PartialUserI {
   received_events_url: string;
   type: string;
   site_admin: boolean;
+  isFavourite?: boolean;
 }
 
 export interface UsersI {

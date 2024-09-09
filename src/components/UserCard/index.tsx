@@ -17,7 +17,7 @@ export const UserCard = ({
   loginName: string;
   avatar_url: string;
   isFavourite: boolean;
-  handleIsFavourite: (isFavourite: boolean) => void;
+  handleIsFavourite: () => void;
 }) => {
   return (
     <PaperStyled>
@@ -25,11 +25,8 @@ export const UserCard = ({
         <AvatarStyled alt={loginName} src={avatar_url} />
       </Link>
       <Typography variant="h6">{loginName}</Typography>
-      <IconButtonStyled
-        sx={{ marginLeft: "auto" }}
-        onClick={() => handleIsFavourite(isFavourite)}
-      >
-        {isFavourite ? <StarBorderIconStyled /> : <StarIconStyled />}
+      <IconButtonStyled sx={{ marginLeft: "auto" }} onClick={handleIsFavourite}>
+        {isFavourite ? <StarIconStyled /> : <StarBorderIconStyled />}
       </IconButtonStyled>
     </PaperStyled>
   );
