@@ -16,9 +16,9 @@ export default function Home({ users }: UsersI) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const usersQuery = context.query?.users;
-  const apiUrl = usersQuery
-    ? `${NEXT_PUBLIC_GITHUB_API}/search/users?q=${usersQuery}`
-    : `${NEXT_PUBLIC_GITHUB_API}/users`;
+  const apiUrl = `${NEXT_PUBLIC_GITHUB_API}/${
+    usersQuery ? `search/users?q=${usersQuery}` : "users"
+  }`;
 
   const users = await axios
     .get(apiUrl)
