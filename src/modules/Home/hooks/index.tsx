@@ -27,19 +27,20 @@ export const useHomeUtils = ({ users }: UsersI) => {
   };
 
   const handleQuerySearch = async () => {
-    if (!searchQuery) return;
-
-    router.push({
-      query: {
-        users: searchQuery,
-      },
-    });
     setIsLoadingQuery(true);
     setQueryError(false);
 
+    const queryParams = searchQuery
+      ? { query: { users: searchQuery } }
+      : { query: null };
+    router.push(queryParams);
+
+    const apiUrl = `${NEXT_PUBLIC_GITHUB_API}${
+      searchQuery ? `/search/users?q=${searchQuery}` : "/users"
+    }`;
     await axios
-      .get(`${NEXT_PUBLIC_GITHUB_API}/search/users?q=${searchQuery}`)
-      .then((response) => setUsersClient(response.data.items))
+      .get(apiUrl)
+      .then((response) => setUsersClient(response.data.items ?? response.data))
       .catch((error) => setQueryError(error))
       .finally(() => setIsLoadingQuery(false));
   };

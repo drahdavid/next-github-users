@@ -1,9 +1,11 @@
 import { UserI } from "@/globals/interfaces";
-import { Paper, Typography, Grid2, IconButton } from "@mui/material";
+import { Typography, Grid2 } from "@mui/material";
 import {
-  AvatarContainer,
+  AvatarBox,
   AvatarStyled,
-  DetailedDataContainer,
+  DetailedDataBox,
+  IconButtonStyled,
+  PaperStyled,
   StarBorderIconStyled,
   StarIconStyled,
 } from "./styles";
@@ -22,23 +24,20 @@ export const UserDetail = ({
   handleIsFavourite: () => void;
 }) => {
   return (
-    <Paper elevation={3} style={{ padding: "20px" }}>
+    <PaperStyled elevation={3}>
       <Grid2 container spacing={2}>
-        <AvatarContainer>
+        <AvatarBox>
           <AvatarStyled src={avatarUrl} alt={name} />
-        </AvatarContainer>
+        </AvatarBox>
         <Grid2>
           <Typography variant="h4">
             {name}
-            <IconButton
-              onClick={handleIsFavourite}
-              style={{ marginLeft: "8px" }}
-            >
+            <IconButtonStyled onClick={handleIsFavourite}>
               {isFavourite ? <StarIconStyled /> : <StarBorderIconStyled />}
-            </IconButton>
+            </IconButtonStyled>
           </Typography>
 
-          <DetailedDataContainer>
+          <DetailedDataBox>
             {Object.entries(user).map(([key, value]) => {
               if (key === "name") return;
               return (
@@ -48,9 +47,9 @@ export const UserDetail = ({
                 </Typography>
               );
             })}
-          </DetailedDataContainer>
+          </DetailedDataBox>
         </Grid2>
       </Grid2>
-    </Paper>
+    </PaperStyled>
   );
 };

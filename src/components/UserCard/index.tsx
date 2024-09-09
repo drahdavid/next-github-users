@@ -25,7 +25,7 @@ export const UserCard = ({
         <AvatarStyled alt={loginName} src={avatar_url} />
       </Link>
       <Typography variant="h6">{loginName}</Typography>
-      <IconButtonStyled sx={{ marginLeft: "auto" }} onClick={handleIsFavourite}>
+      <IconButtonStyled onClick={handleIsFavourite}>
         {isFavourite ? <StarIconStyled /> : <StarBorderIconStyled />}
       </IconButtonStyled>
     </PaperStyled>
