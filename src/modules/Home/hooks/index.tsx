@@ -52,7 +52,7 @@ export const useHomeUtils = ({ users }: UsersI) => {
     setUsersClient(
       usersClient.map((user) =>
         user.id === selectedUser.id
-          ? { ...user, isFavourite: !user.isFavourite }
+          ? { ...user, isFavourite: favouriteUsers.includes(user.id) }
           : user
       )
     );
