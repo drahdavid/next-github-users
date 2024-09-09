@@ -1,8 +1,9 @@
 import { PartialUserI, UsersI } from "@/globals/interfaces";
-import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
+import { COOKIES_KEYS, NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 export const useHomeUtils = ({ users }: UsersI) => {
   const router = useRouter();
@@ -11,6 +12,10 @@ export const useHomeUtils = ({ users }: UsersI) => {
   const [isLoadingQuery, setIsLoadingQuery] = useState(false);
   const [queryError, setQueryError] = useState(false);
   const [showFavourites, setShowFavourites] = useState(false);
+
+  const favouriteUsers = Cookies.get(COOKIES_KEYS.favouriteUsers)
+    ? JSON.parse(Cookies.get(COOKIES_KEYS.favouriteUsers) ?? "[]")
+    : [];
 
   const handleQueryChange = (query: string) => {
     setSearchQuery(query);
@@ -35,6 +40,15 @@ export const useHomeUtils = ({ users }: UsersI) => {
   };
 
   const handleIsFavourite = (selectedUser: PartialUserI) => {
+    const updatedFavouriteUsers = favouriteUsers.includes(selectedUser.id)
+      ? favouriteUsers.filter((id: number) => id !== selectedUser.id)
+      : [...favouriteUsers, selectedUser.id];
+
+    Cookies.set(
+      COOKIES_KEYS.favouriteUsers,
+      JSON.stringify(updatedFavouriteUsers)
+    );
+
     setUsersClient(
       usersClient.map((user) =>
         user.id === selectedUser.id
@@ -58,5 +72,6 @@ export const useHomeUtils = ({ users }: UsersI) => {
     handleQuerySearch,
     handleIsFavourite,
     handleShowFavourites,
+    favouriteUsers,
   };
 };

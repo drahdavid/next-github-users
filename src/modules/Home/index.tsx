@@ -19,6 +19,7 @@ export const Home = ({ users }: UsersI) => {
     searchQuery,
     isLoadingQuery,
     queryError,
+    favouriteUsers,
     handleQueryChange,
     handleQuerySearch,
     handleIsFavourite,
@@ -55,13 +56,15 @@ export const Home = ({ users }: UsersI) => {
           <Typography>No results found</Typography>
         ) : (
           usersClient
-            .filter((user) => (showFavourites ? user?.isFavourite : true))
+            .filter((user) =>
+              showFavourites ? favouriteUsers.includes(user.id) : true
+            )
             .map((user) => (
               <UserCard
                 key={user.id}
                 loginName={user.login}
                 avatar_url={user.avatar_url}
-                isFavourite={user?.isFavourite ?? false}
+                isFavourite={favouriteUsers.includes(user.id) ?? false}
                 handleIsFavourite={() => handleIsFavourite(user)}
               />
             ))
