@@ -42,7 +42,7 @@ export const UserDetail = ({
               if (key === "name") return;
               return (
                 <Typography variant="caption" key={key}>
-                  • {key}:{" "}
+                  • {key}:
                   {value !== null && value !== "" ? value.toString() : "N/A"}
                 </Typography>
               );
