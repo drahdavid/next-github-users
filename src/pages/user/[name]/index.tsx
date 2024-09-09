@@ -2,14 +2,14 @@ import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { UserI } from "@/globals/interfaces";
 import { Layout } from "@/components/Layout";
-import { NotFound } from "@/components/NotFound";
+import { Error } from "@/components/Error";
 import { User as UserModule } from "@/modules/User";
 import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
 
 export default function User({ user }: { user: UserI }) {
   return (
     <Layout title="User">
-      {user ? <UserModule user={user} /> : <NotFound searchTerm="user" />}
+      {user ? <UserModule user={user} /> : <Error searchTerm="user" />}
     </Layout>
   );
 }

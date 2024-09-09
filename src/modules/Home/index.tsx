@@ -22,7 +22,7 @@ export const Home = ({ users }: UsersI) => {
     favouriteUsers,
     handleQueryChange,
     handleQuerySearch,
-    handleIsFavourite,
+    handleSetFavourite,
     handleShowFavourites,
   } = useHomeUtils({ users });
 
@@ -65,7 +65,7 @@ export const Home = ({ users }: UsersI) => {
                 loginName={user.login}
                 avatar_url={user.avatar_url}
                 isFavourite={favouriteUsers.includes(user.id) ?? false}
-                handleIsFavourite={() => handleIsFavourite(user)}
+                handleIsFavourite={() => handleSetFavourite(user)}
               />
             ))
         )}

@@ -4,12 +4,12 @@ import { UsersI } from "@/globals/interfaces";
 import { Home as HomeModule } from "@/modules/Home";
 import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
 import { GetServerSidePropsContext } from "next";
-import { NotFound } from "@/components/NotFound";
+import { Error } from "@/components/Error";
 
 export default function Home({ users }: UsersI) {
   return (
     <Layout title="Home">
-      {users ? <HomeModule users={users} /> : <NotFound searchTerm="users" />}
+      {users ? <HomeModule users={users} /> : <Error searchTerm="users" />}
     </Layout>
   );
 }
