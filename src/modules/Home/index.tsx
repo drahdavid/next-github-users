@@ -57,7 +57,7 @@ export const Home = ({ users }: UsersI) => {
         ) : (
           usersClient
             .filter((user) =>
-              showFavourites ? favouriteUsers.includes(user.id) : true
+              showFavourites ? favouriteUsers.includes(user.id) : user
             )
             .map((user) => (
               <UserCard
