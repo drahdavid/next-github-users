@@ -1,35 +1,41 @@
-import Head from "next/head";
-import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
+import { Layout } from "@/components/Layout";
+import axios from "axios";
+import { UsersI } from "@/globals/interfaces";
+import { Home as HomeModule } from "@/modules/Home";
+import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
+import { GetServerSidePropsContext } from "next";
+import { Error } from "@/components/Error";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-export default function Home() {
+export default function Home({ users }: UsersI) {
   return (
-    <>
-      <Head>
-        <title>Github App</title>
-        <meta
-          name="description"
-          content="Application that handles github users"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div
-        className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
-      >
-        <h1>Hola</h1>
-      </div>
-    </>
+    <Layout title="Home">
+      {users ? <HomeModule users={users} /> : <Error searchTerm="users" />}
+    </Layout>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const usersQuery = context.query?.users;
+  const apiUrl = `${NEXT_PUBLIC_GITHUB_API}/${
+    usersQuery ? `search/users?q=${usersQuery}` : "users"
+  }`;
+
+  const users = await axios
+    .get(apiUrl)
+    .then((reponse) => reponse.data)
+    .catch((error) => console.log(error));
+
+  if (!users) {
+    return {
+      props: {
+        users: null,
+      },
+    };
+  }
+
+  return {
+    props: {
+      users: users.items ?? users,
+    },
+  };
 }

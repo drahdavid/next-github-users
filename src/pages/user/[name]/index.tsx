@@ -1,19 +1,38 @@
-import Head from "next/head";
+import axios from "axios";
+import { GetServerSidePropsContext } from "next";
+import { UserI } from "@/globals/interfaces";
+import { Layout } from "@/components/Layout";
+import { Error } from "@/components/Error";
+import { User as UserModule } from "@/modules/User";
+import { NEXT_PUBLIC_GITHUB_API } from "@/utils/constants";
 
-export default function User() {
+export default function User({ user }: { user: UserI }) {
   return (
-    <>
-      <Head>
-        <title>Github App</title>
-        <meta
-          name="description"
-          content="Application that handles github users"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <h2>User</h2>
-    </>
+    <Layout title="User">
+      {user ? <UserModule user={user} /> : <Error searchTerm="user" />}
+    </Layout>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const userName = context.params?.name;
+
+  const user = await axios
+    .get(`${NEXT_PUBLIC_GITHUB_API}/users/${userName}`)
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+
+  if (!user) {
+    return {
+      props: {
+        user: null,
+      },
+    };
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
 }
