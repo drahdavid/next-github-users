@@ -1,5 +1,5 @@
 export const fetchService = async <T>(url: string): Promise<T> => {
-  const token = "your-bearer-token";
+  const token = "your-token";
   try {
     const response = await fetch(url, {
       headers: {
